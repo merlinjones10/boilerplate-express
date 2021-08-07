@@ -4,7 +4,8 @@ require("dotenv").config();
 
 const simpleLogger = (req, res, next) => {
   let { method, path, ip } = req;
-  console.log(method, path, ip);
+  var string = method + " " + path + " - " + ip;
+  console.log(string);
   next();
 };
 
