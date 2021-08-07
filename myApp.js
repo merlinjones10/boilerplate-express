@@ -5,11 +5,16 @@ require("dotenv").config();
 const simpleLogger = (req, res, next) => {
   let { method, path, ip } = req;
   var string = method + " " + path + " - " + ip;
-  console.log(string);
+  //   console.log(string);
   next();
 };
 
 app.use(simpleLogger);
+
+app.get("/:word/echo", (req, res) => {
+  //   console.log(req.params);
+  res.send({ echo: req.params.word });
+});
 
 app.get(
   "/now",
