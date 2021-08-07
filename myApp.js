@@ -8,12 +8,17 @@ const simpleLogger = (req, res, next) => {
   //   console.log(string);
   next();
 };
-
+// params PATH/:123 || query PATH/?name=merlin
 app.use(simpleLogger);
 
 app.get("/:word/echo", (req, res) => {
   //   console.log(req.params);
   res.send({ echo: req.params.word });
+});
+
+app.get("/name", (req, res) => {
+  const { firstname, lastname } = req.query;
+  res.json({ name: `${firstname} ${lastname} ` });
 });
 
 app.get(
