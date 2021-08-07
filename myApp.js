@@ -11,6 +11,17 @@ const simpleLogger = (req, res, next) => {
 
 app.use(simpleLogger);
 
+app.get(
+  "/now",
+  (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+  },
+  function (req, res) {
+    res.send({ time: req.time });
+  }
+);
+
 app.get("/json", (req, res) => {
   let jsonResponse = { message: "Hello json" };
   if (process.env.MESSAGE_STYLE === "uppercase") {
