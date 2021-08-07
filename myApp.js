@@ -2,7 +2,14 @@ var express = require("express");
 var app = express();
 require("dotenv").config();
 
-console.log(process.env.MESSAGE_STYLE);
+const simpleLogger = (req, res, next) => {
+  let { method, path, ip } = req;
+  console.log(method, path, ip);
+  next();
+};
+
+app.use(simpleLogger);
+
 app.get("/json", (req, res) => {
   let jsonResponse = { message: "Hello json" };
   if (process.env.MESSAGE_STYLE === "uppercase") {
