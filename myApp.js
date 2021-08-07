@@ -1,20 +1,22 @@
 var express = require("express");
 var app = express();
 require("dotenv").config();
+const bodyParser = require("body-parser");
 
-const simpleLogger = (req, res, next) => {
-  let { method, path, ip } = req;
-  var string = method + " " + path + " - " + ip;
-  //   console.log(string);
-  next();
-};
+// const simpleLogger = (req, res, next) => {
+//   let { method, path, ip } = req;
+//   var string = method + " " + path + " - " + ip;
+//   //   console.log(string);
+//   next();
+// };
 // params PATH/:123 || query PATH/?name=merlin
-app.use(simpleLogger);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get("/:word/echo", (req, res) => {
-  //   console.log(req.params);
-  res.send({ echo: req.params.word });
-});
+// app.get("/:word/echo", (req, res) => {
+//   //   console.log(req.params);
+//   res.send({ echo: req.params.word });
+// });
 
 app.get("/name", function (req, res) {
   var { first: firstName, last: lastName } = req.query;
